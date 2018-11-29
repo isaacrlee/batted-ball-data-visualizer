@@ -8,7 +8,7 @@ This web application visualizes batted ball data:
 
 Powered by Bootstrap, Algolia, plotly.js, and Vanilla JS
 
-Next Steps:
+### Next Steps:
 * Batter and pitcher selection is buggy, should probably use Angular for true data binding.
 * Add summary statistics.
 * Plotly plots are clean but sparse, could use D3 to create better plots.
