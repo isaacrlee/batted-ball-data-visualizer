@@ -88,6 +88,7 @@ var updatePlots = function (results) {
     Plotly.addTraces('polar-plot', createPolarTraces(results))
 
     scatterPlot.on('plotly_click', function (data) {
+        console.log(data);
         window.open(data.points[0].text);
     })
 
@@ -114,7 +115,7 @@ function createScatterTraces(results) {
             {
                 x: _.map(outcomes[outcome], 'EXIT_SPEED'),
                 y: _.map(outcomes[outcome], 'LAUNCH_ANGLE'),
-                text: _.map(outcome, 'VIDEO_LINK'),
+                text: _.map(outcomes[outcome], 'VIDEO_LINK'),
                 mode: 'markers',
                 marker: {
                     color: colors[outcome]
