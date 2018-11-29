@@ -4,170 +4,50 @@
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch-theme-algolia.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <div id="search-box">
+    <h1 class="display-4 text-center">
+        Batted Ball Data for
+        <br>
+        <div class="batter-aa-input-container" id="batter-aa-input-container">
+            <input type="search" id="batter-aa-search-input" class="batter-aa-input-search" placeholder="Batter" name="search"
+                autocomplete="off" />
 
+        </div>
+        and
+        <div class="pitcher-aa-input-container" id="pitcher-aa-input-container">
+            <input type="search" id="pitcher-aa-search-input" class="pitcher-aa-input-search" placeholder="Pitcher"
+                name="search" autocomplete="off" />
+        </div>
+    </h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="scatter-plot"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="polar-plot"></div>
+            </div>
+        </div>
     </div>
-
-    <div id="hits">
-
-    </div>
-    <canvas id="scatter-chart" width="400" height="400"></canvas>
-    <canvas id="scatter-chart" width="400" height="400"></canvas>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
-    <script>
-        // SEARCH
-        var search = instantsearch({
-            appId: 'FXI57GZTUI',
-            apiKey: '526a4043d587ee892500554ce05d7bb5',
-            indexName: 'plays',
-            routing: true,
-        });
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
 
-        search.addWidget(
-            instantsearch.widgets.searchBox({
-                container: '#search-box',
-                placeholder: 'Search for plays'
-            })
-        )
-
-        var GRAY = '#AAAAAA';
-        var NAVY = '#001f3f';
-        var BLUE = '#0074D9';
-        var GREEN = '#2ECC40';
-        var YELLOW = '#FFDC00';
-        var ORANGE = '#FF851B';
-        var RED = '#FF4136';
-        var MAROON = '#85144b';
-
-        search.addWidget({
-            render: function (opts) {
-                var results = opts.results;
-                // read the hits from the results and transform them into HTML.
-
-
-                // CHARTS
-                var playOutcomes = _.groupBy(results.hits, 'PLAY_OUTCOME');
-
-                var ctx = document.getElementById("scatter-chart").getContext('2d');
-                Chart.defaults.global.elements.point.radius = 6;
-                var scatterChart = new Chart(ctx, {
-                    type: 'scatter',
-                    data: {
-                        datasets: [{
-                            label: 'Undefined',
-                            data: _.map(playOutcomes.Undefined, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: GRAY
-                        },
-                        {
-                            label: 'Out',
-                            data: _.map(playOutcomes.Out, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: NAVY
-                        },
-                        {
-                            label: 'FieldersChoice',
-                            data: _.map(playOutcomes.FieldersChoice, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: BLUE
-                        },
-                        {
-                            label: 'Sacrifice',
-                            data: _.map(playOutcomes.Sacrifice, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: GREEN
-                        },
-                        {
-                            label: 'Single',
-                            data: _.map(playOutcomes.Single, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: YELLOW
-                        },
-                        {
-                            label: 'Double',
-                            data: _.map(playOutcomes.Double, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: ORANGE
-                        },
-                        {
-                            label: 'Triple',
-                            data: _.map(playOutcomes.Triple, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: RED
-                        },
-                        {
-                            label: 'HomeRun',
-                            data: _.map(playOutcomes.HomeRun, function (h) {
-                                return { x: h.EXIT_SPEED, y: h.LAUNCH_ANGLE }
-                            }),
-                            backgroundColor: MAROON
-                        }
-
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            xAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                        title: {
-                            display: true,
-                            fontSize: 24,
-                            text: 'Exit Speed vs Launch Angle'
-                        },
-                        tooltips: {
-                            callbacks: {
-                                label: function (tooltipItem, data) {
-                                    return '' + _.round(tooltipItem.xLabel, 1) + 'mph, ' + _.round(tooltipItem.yLabel, 1) + 'deg';
-                                }
-                            }
-                        }
-                    }
-                });
-
-                var datasets = [
-                    playOutcomes.Undefined,
-                    playOutcomes.Out,
-                    playOutcomes.FieldersChoice,
-                    playOutcomes.Sacrifice,
-                    playOutcomes.Single,
-                    playOutcomes.Double,
-                    playOutcomes.Triple,
-                    playOutcomes.HomeRun
-                ]
-
-                document.getElementById("scatter-chart").onclick = function (evt) {
-                    // var points = scatterChart.getElementsAtEvent(evt);
-                    var points = scatterChart.lastActive;
-                    if (points.length > 0) {
-                        // console.log(points);
-                        // console.log(datasets[points[0]._datasetIndex][points[0]._index]);
-                        window.open(datasets[points[0]._datasetIndex][points[0]._index].VIDEO_LINK);
-                    }
-
-                }
-            }
-        });
-
-        search.start();
-    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
