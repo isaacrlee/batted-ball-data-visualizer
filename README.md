@@ -1,14 +1,32 @@
 # Batted Ball Data Visualizer
 
-View by visiting http://isaacrlee.com/batted-ball-data-visualizer/ or clone and open `index.html` in a browser.
+This web app visualized batted ball data to create spray charts and plots.
 
-This web application visualizes batted ball data:
-![Example Data](https://raw.githubusercontent.com/isaacrlee/batted-ball-data-visualizer/master/DataScreenshot.png?token=AK9qpDH7H6RIMcxTX3fxgYLkC0xpnEbIks5cCaKRwA%3D%3D "Example Data")
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+First, clone the repository.
+
+```
+git clone https://github.com/isaacrlee/batted-ball-data-visualizer.git
+```
+
+Then open `index.html`:
+
 to create plots for batters, pitchers, and batter pitcher matchups: ![Example Batted Ball Plots](https://github.com/isaacrlee/batted-ball-data-visualizer/raw/master/ScreenShot.png "Example Batted Ball Plots")
 
-Powered by Bootstrap, Algolia, plotly.js, and Vanilla JS
+## Example Data
 
-### Next Steps:
+Excel and csv files of example batted ball data are included in the desired formart: `BattedBallData.(csv|xlsx)`.
+
+## Built With
+
+* [Bootstrap](https://getbootstrap.com/) - The web framework used
+* [Algolia](https://www.algolia.com/) - Data search
+* [plotly.js](https://plot.ly/javascript/) - Used to generate charts
+
+## Next Steps
 * Batter and pitcher selection is buggy, should probably use Angular for true data binding.
 * Add summary statistics.
 * Plotly plots are clean but sparse, could use D3 to create better plots.
