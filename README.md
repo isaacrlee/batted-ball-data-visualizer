@@ -13,12 +13,11 @@ git clone https://github.com/isaacrlee/batted-ball-data-visualizer.git
 ```
 
 Then open `index.html`:
-
-to create plots for batters, pitchers, and batter pitcher matchups: ![Example Batted Ball Plots](https://github.com/isaacrlee/batted-ball-data-visualizer/raw/master/ScreenShot.png "Example Batted Ball Plots")
+![Example Batted Ball Plots](https://github.com/isaacrlee/batted-ball-data-visualizer/raw/master/ScreenShot.png "Example Batted Ball Plots")
 
 ## Example Data
 
-Excel and csv files of example batted ball data are included in the desired formart: `BattedBallData.(csv|xlsx)`.
+Excel and .csv files of example batted ball data in the required format are included: `BattedBallData.(csv|xlsx)`.
 
 ## Built With
 
