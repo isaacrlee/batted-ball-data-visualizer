@@ -1,6 +1,6 @@
 # Batted Ball Data Visualizer
 
-This web app visualized batted ball data to create spray charts and plots.
+This web app visualized batted ball data to create spray charts and plots. The web app is deployed at http://isaacrlee.com/batted-ball-data-visualizer/.
 
 ## Getting Started
 
